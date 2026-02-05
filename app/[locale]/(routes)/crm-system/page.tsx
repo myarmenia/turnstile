@@ -1,6 +1,6 @@
 import Banner from '@/app/components/Banner/Banner';
 import AdminPanelScreenSection from '@/app/components/AdminPanelScreenSection/AdminPanelScreenSection'
-import TurnstileServicesCicyleSection from '@/app/components/TurnstileServicesCicyleSection/TurnstileServicesCicyleSection'
+// import TurnstileServicesCicyleSection from '@/app/components/TurnstileServicesCicyleSection/TurnstileServicesCicyleSection'
 
 import React from 'react';
 import bannerBg from '@/public/images/security_systems_banner_bacground.png';
