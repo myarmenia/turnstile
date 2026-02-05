@@ -16,7 +16,7 @@ type Product = {
   description?: string;
   price?: number;
   // Добавляем другие поля которые могут быть нужны
-  [key: string]: any; // Для любых дополнительных полей
+  [key: string]: string | number | boolean | undefined; // Для любых дополнительных полей
 };
 
 // Обновляем тип параметров для generateMetadata
