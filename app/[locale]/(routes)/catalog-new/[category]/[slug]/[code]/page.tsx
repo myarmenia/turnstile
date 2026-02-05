@@ -160,7 +160,6 @@ const SingleProductPage = async ({ params }: PageProps) => {
 
     // Для слайдера используем все изображения
     const sliderImages = allMediaItems.filter(item => item.type === 'image');
-    const mainImageUrl = product.main_image?.url || "";
     const videoItems = product.videos;
     const documentItems = product.documents;
     const additionalFileItems = product.additional_files;
