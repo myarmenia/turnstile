@@ -5,10 +5,18 @@ import CatalogItemNew from '@/app/components/CatalogItem/CatalogItemNew';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 
+// Расширяем тип Product с недостающими полями
 type Product = {
   id: number;
   code: string;
   image: string;
+  slug: string;
+  category_slug: string;
+  name?: string;
+  description?: string;
+  price?: number;
+  // Добавляем другие поля которые могут быть нужны
+  [key: string]: any; // Для любых дополнительных полей
 };
 
 // Обновляем тип параметров для generateMetadata
@@ -28,7 +36,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
   };
 
   const descriptions = {
-    am: 'Մեր կատալոգում կարող եք գտնել բարձրորակ տուրնիկետներ՝ նախատեսված տարբեր միջավայրերի համար: Անցումների վերահսկման լուծումներ բիզնես կենտրոնների, մարզադահլիճների և պետական հիմնարկների համար: Բարձր որակ, դիմացկունություն և ժամանակակից դիզայն: Արագ առաքում և տեղադրում: Մասնագիտական խորհրդատվություն:',
+    am: 'Մեր կատալոգում կարող եք գտնել բարձրորակ տուրնիկետներ՝ նախատեսված տարբեր միջավայրերի համար: Անցումների վերահսկման լուծումներ բիզնես կենտրոնների, մարզադահլիճների և պետական հիմնարկների համար: Բարձր որակ, дիմացկունություն և ժամանակակից դիզայն: Արագ առաքում և տեղադրում: Մասնագիտական խորհրդատվություն:',
     ru: 'Наш каталог предлагает высококачественные турникеты для различных сред. Решения для контроля доступа в бизнес-центры, спортивные залы и государственные учреждения. Высокое качество, долговечность и современный дизайн. Быстрая доставка и установка. Профессиональные консультации.',
     en: 'Our catalog features high-quality turnstiles designed for various environments. Access control solutions for business centers, gyms, and government institutions. High quality, durability, and modern design. Fast delivery and installation. Professional consultation.'
   };
@@ -41,7 +49,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
     description: `${description} turniket gnel | turniketner vacharq | mutqi hamakarg | տուռնիկետ տուռնիկետների վաճառք | տուռնիկետներ գնել մուտքի համակարգ | անվտանգության համակարգ | турникеты ереван | турникет | купить турникет | продажа турникетов | система безопасности`,
     openGraph: {
       title,
-      description: `${description} turniket gnel | turniketner vacharq | mutqi hamakarg | տուռնիկետ տուռնիկետների վաճառք | տուռնիկետներ գնել մուտքի համակարգ | անվտանգության համակարգ | турникеты ереван | турникет | купить турникет | продажа турникетов | система безопасности`,
+      description: `${description} turniket gnel | turniketner vacharq | mutqi hamakarg | տուռնիկետ տուռնիկետների վաճառք | տուռնիկետներ գնել մուտքի համակարգ | անվտանգության համակարգ | турникеты ереван | турникет | купить турникет | продажа турniketов | система безопасности`,
       url: `https://turniket.am/${locale}/catalog`,
       siteName: "turniket.am",
       type: "website",
@@ -58,7 +66,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
     twitter: {
       card: "summary_large_image",
       title,
-      description: `${description} turniket gnel | turniketner vacharq | mutqi hamakarg | տուռնիկետ տուռնիկետների վաճառք | տուռնիկետներ գնել մուտքի համակարգ | անվտանգության համակարգ | турникеты ереван | турniket | купить турникет | продажа турникетов | система безопасности`,
+      description: `${description} turniket gnel | turniketner vacharq | mutqi hamakarg | տուռնիկետ տուռնիկետների վաճառք | տուռնիկետներ գնել մուտքի համակարգ | անվտանգության համակարգ | турnikеты ереван | турникет | купить турникет | продажа турникетов | система безопасности`,
       images: ["/images/navlogo.png"]
     },
     alternates: {
@@ -98,6 +106,12 @@ async function getProducts(locale: string): Promise<Product[]> {
   }
 
   const data = await res.json();
+
+  // Логируем структуру данных для отладки
+  if (data.data && data.data.length > 0) {
+    console.log('First product structure:', Object.keys(data.data[0]));
+  }
+
   return data.data || [];
 }
 
