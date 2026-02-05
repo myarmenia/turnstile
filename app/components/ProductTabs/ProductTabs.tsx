@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { FaFileAlt, FaImages, FaVideo } from 'react-icons/fa';
 import { MdDescription, MdSettings } from 'react-icons/md';
-import Image from 'next/image'; // Добавляем импорт Image
+import Image from 'next/image';
 
 // Определяем тип для delivery вместо any
 interface DeliveryInfo {
@@ -40,12 +40,13 @@ interface TabProps {
         gallery: ImageData[];
         videos: VideoData[];
         documents: DocumentData[];
-        delivery: DeliveryInfo | null; // Заменяем any на конкретный тип
+        delivery: DeliveryInfo | null;
     };
     productName?: string;
 }
 
-const ProductTabs = ({ data, productName }: TabProps) => { // Добавляем productName в деструктуризацию
+// Используем префикс _ для неиспользуемой переменной
+const ProductTabs = ({ data, productName: _productName }: TabProps) => {
     const t = useTranslations('ProductTabs');
     const [activeTab, setActiveTab] = useState('description');
 
@@ -236,8 +237,9 @@ const ProductTabs = ({ data, productName }: TabProps) => { // Добавляем
                             : 'text-gray-600 hover:text-gray-900'
                             }`}
                         aria-label={t('showTab', { tab: tab.label })}
-                        aria-selected={activeTab === tab.id}
                         type="button"
+                        role="tab"
+                        aria-selected={activeTab === tab.id}
                     >
                         {tab.icon}
                         {tab.label}
