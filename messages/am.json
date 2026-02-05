@@ -709,5 +709,59 @@
             "Մի մասից կազմված, հոսքի տեսքով և ոճային կլիպ դռան տեղադրում, առանց ապակին վնասելու մտահոգության",
             "Ապրանքի չափսերը՝ 190*76*68մմ"
         ]
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "ProductGallery": {
+        "thumbnailPrefix": "Մանրապատկեր",
+        "imageFallbackWithName": "{name} - նկար {number}",
+        "imageFallback": "Ապրանքի նկար {number}",
+        "viewImage": "Դիտել {alt}",
+        "noImages": "Լրացուցիչ նկարներ չկան",
+        "prevImage": "Նախորդ նկարը",
+        "nextImage": "Հաջորդ նկարը",
+        "showImage": "Ցուցադրել {alt}",
+        "image": "նկար",
+        "imageCounter": "Նկար {current} {total}-ից"
+    },
+
+    "ProductTabs": {
+        "description": "Նկարագրություն",
+        "specifications": "Տեխնիկական բնութագիր",
+        "gallery": "Պատկերասրահ",
+        "videos": "Տեսանյութեր",
+        "documents": "Փաստաթղթեր",
+        "delivery": "Առաքում և վճարում",
+        "image": "նկար",
+        "video": "տեսանյութ",
+        "document": "Փաստաթուղթ",
+        "download": "Ներբեռնել",
+        "showTab": "Ցույց տալ {tab} ներդիրը",
+        "noContent": "Բովանդակությունը հասանելի չէ",
+        "viewImage": "Դիտել նկարը"
+    },
+
+    "ProductPage": {
+        "image": "նկար",
+        "noSliderImages": "Սահադաշտի լրացուցիչ նկարներ չկան",
+        "mainAdvantages": "Հիմնական առավելությունները",
+        "productDetails": "Ապրանքի մանրամասները",
+        "category": "Կատեգորիա",
+        "productCode": "Ապրանքի կոդ",
+        "contactForPurchase": "Կապ գնման համար",
+        "contactDescription": "Զանգահարեք խորհրդատվության և պատվերի համար",
+        "call": "Զանգահարել"
     }
 }

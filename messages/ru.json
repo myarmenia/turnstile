@@ -713,5 +713,69 @@
             "Монолитная стильная установка на дверной клип, не нужно беспокоиться о повреждении стекла",
             "Размер продукта: 190*76*68 мм"
         ]
+    },
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "ProductGallery": {
+        "thumbnailPrefix": "Миниатюра",
+        "imageFallbackWithName": "{name} - фото {number}",
+        "imageFallback": "Изображение товара {number}",
+        "viewImage": "Посмотреть {alt}",
+        "noImages": "Нет дополнительных изображений",
+        "prevImage": "Предыдущее изображение",
+        "nextImage": "Следующее изображение",
+        "showImage": "Показать {alt}",
+        "image": "изображение",
+        "imageCounter": "Изображение {current} из {total}"
+    },
+
+    "ProductTabs": {
+        "description": "Описание",
+        "specifications": "Характеристики",
+        "gallery": "Галерея",
+        "videos": "Видео материалы",
+        "documents": "Документы",
+        "delivery": "Доставка и оплата",
+        "image": "изображение",
+        "video": "видео",
+        "document": "Документ",
+        "download": "Скачать",
+        "showTab": "Показать вкладку {tab}",
+        "noContent": "Содержимое недоступно",
+        "viewImage": "Посмотреть изображение"
+    },
+
+
+    "ProductPage": {
+        "image": "изображение",
+        "noSliderImages": "Нет дополнительных изображений для слайдера",
+        "mainAdvantages": "Основные преимущества",
+        "productDetails": "Детали товара",
+        "category": "Категория",
+        "productCode": "Код товара",
+        "contactForPurchase": "Контакт для покупки",
+        "contactDescription": "Позвоните для консультации и заказа",
+        "call": "Позвонить"
     }
 }

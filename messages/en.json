@@ -717,5 +717,68 @@
       "One-piece streamlined and stylish clip door installation, no need to worry about damaging the glass",
       "Product size: 190*76*68mm"
     ]
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "ProductGallery": {
+    "thumbnailPrefix": "Thumbnail",
+    "imageFallbackWithName": "{name} - photo {number}",
+    "imageFallback": "Product image {number}",
+    "viewImage": "View {alt}",
+    "noImages": "No additional images",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "showImage": "Show {alt}",
+    "image": "image",
+    "imageCounter": "Image {current} of {total}"
+  },
+
+
+  "ProductTabs": {
+    "description": "Description",
+    "specifications": "Specifications",
+    "gallery": "Gallery",
+    "videos": "Videos",
+    "documents": "Documents",
+    "delivery": "Delivery & Payment",
+    "image": "image",
+    "video": "video",
+    "document": "Document",
+    "download": "Download",
+    "showTab": "Show {tab} tab",
+    "noContent": "Content not available",
+    "viewImage": "View image"
+  },
+
+  "ProductPage": {
+    "image": "image",
+    "noSliderImages": "No additional images for slider",
+    "mainAdvantages": "Main advantages",
+    "productDetails": "Product details",
+    "category": "Category",
+    "productCode": "Product code",
+    "contactForPurchase": "Contact for purchase",
+    "contactDescription": "Call for consultation and order",
+    "call": "Call"
   }
 }
