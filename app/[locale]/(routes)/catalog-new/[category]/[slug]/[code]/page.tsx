@@ -338,7 +338,6 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                 py="10px"
                                 px="0"
                                 order={product.code}
-                                href={productUrl}
                             />
                         </div>
                     </div>
@@ -349,7 +348,7 @@ const SingleProductPage = async ({ params }: PageProps) => {
             <div className="mt-8">
                 <ProductTabs
                     data={tabsData}
-                    productName={product.name}
+                    // productName={product.name}
                 />
             </div>
 
