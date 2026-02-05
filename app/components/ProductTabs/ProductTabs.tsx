@@ -1,5 +1,3 @@
-// // app/components/ProductTabs/ProductTabs.tsx
-
 // app/components/ProductTabs/ProductTabs.tsx
 "use client";
 
@@ -7,6 +5,14 @@ import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { FaFileAlt, FaImages, FaVideo } from 'react-icons/fa';
 import { MdDescription, MdSettings } from 'react-icons/md';
+import Image from 'next/image'; // Добавляем импорт Image
+
+// Определяем тип для delivery вместо any
+interface DeliveryInfo {
+    text?: string;
+    details?: string;
+    [key: string]: unknown; // Если есть дополнительные поля
+}
 
 interface ImageData {
     url: string;
@@ -34,12 +40,12 @@ interface TabProps {
         gallery: ImageData[];
         videos: VideoData[];
         documents: DocumentData[];
-        delivery: any;
+        delivery: DeliveryInfo | null; // Заменяем any на конкретный тип
     };
     productName?: string;
 }
 
-const ProductTabs = ({ data }: TabProps) => {
+const ProductTabs = ({ data, productName }: TabProps) => { // Добавляем productName в деструктуризацию
     const t = useTranslations('ProductTabs');
     const [activeTab, setActiveTab] = useState('description');
 
@@ -91,12 +97,15 @@ const ProductTabs = ({ data }: TabProps) => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {data.gallery.map((image, index) => (
                         <div key={index} className="rounded-lg overflow-hidden group">
-                            <img
+                            <Image
                                 src={image.url}
                                 alt={getImageAlt(image, index)}
                                 title={getImageTitle(image)}
+                                width={300}
+                                height={200}
                                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
                                 onClick={() => window.open(image.url, '_blank')}
+                                style={{ objectFit: 'cover' }}
                             />
                         </div>
                     ))}
@@ -184,8 +193,29 @@ const ProductTabs = ({ data }: TabProps) => {
             ),
             visible: data.documents.length > 0
         }
-
     ];
+
+    // Добавляем вкладку для delivery, если она есть
+    if (data.delivery) {
+        tabs.push({
+            id: 'delivery',
+            label: t('delivery'),
+            icon: <MdDescription />,
+            content: (
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    {typeof data.delivery === 'string' ? (
+                        <div dangerouslySetInnerHTML={{ __html: data.delivery }} />
+                    ) : (
+                        <div>
+                            {data.delivery.text && <p>{data.delivery.text}</p>}
+                            {data.delivery.details && <p className="mt-2 text-sm text-gray-600">{data.delivery.details}</p>}
+                        </div>
+                    )}
+                </div>
+            ),
+            visible: true
+        });
+    }
 
     const visibleTabs = tabs.filter(tab => tab.visible);
 
@@ -207,6 +237,7 @@ const ProductTabs = ({ data }: TabProps) => {
                             }`}
                         aria-label={t('showTab', { tab: tab.label })}
                         aria-selected={activeTab === tab.id}
+                        type="button"
                     >
                         {tab.icon}
                         {tab.label}
@@ -225,5 +256,3 @@ const ProductTabs = ({ data }: TabProps) => {
 };
 
 export default ProductTabs;
-
-
