@@ -11,7 +11,7 @@ import Image from 'next/image';
 interface DeliveryInfo {
     text?: string;
     details?: string;
-    [key: string]: unknown; // Если есть дополнительные поля
+    [key: string]: unknown;
 }
 
 interface ImageData {
@@ -33,6 +33,7 @@ interface DocumentData {
     size?: string;
 }
 
+// Удаляем productName из интерфейса, если он не используется
 interface TabProps {
     data: {
         description: string;
@@ -42,11 +43,11 @@ interface TabProps {
         documents: DocumentData[];
         delivery: DeliveryInfo | null;
     };
-    productName?: string;
+    // productName?: string; // ← удалите эту строку
 }
 
-// Используем префикс _ для неиспользуемой переменной
-const ProductTabs = ({ data, productName: _productName }: TabProps) => {
+// Удаляем productName из параметров
+const ProductTabs = ({ data }: TabProps) => {
     const t = useTranslations('ProductTabs');
     const [activeTab, setActiveTab] = useState('description');
 
