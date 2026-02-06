@@ -34,6 +34,13 @@ const nextConfig: NextConfig = {
                 hostname: 'turnstile_nginx',
                 pathname: '/storage/**',
             },
+            
+            // PROD
+            {
+                protocol: 'https',
+                hostname: 'turnstile-admin.turniket.am',
+                pathname: '/storage/**',
+            },
         ],
     },
 };
