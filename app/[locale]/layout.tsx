@@ -57,17 +57,16 @@ export async function generateMetadata({
 export default async function RootLayout({
   children,
   params,
-}: Readonly<{
+}: {
   children: React.ReactNode;
   params: Promise<LocaleParams>;
-}>) {
+}) {
   const { locale } = await params;
-
   const messages = await getMessages({ locale });
 
   return (
     <html lang={locale}>
-      <head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XGYTB9SK6C"
           strategy="afterInteractive"
@@ -82,9 +81,7 @@ export default async function RootLayout({
             });
           `}
         </Script>
-      </head>
 
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <StoreProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <Analytics />
@@ -102,3 +99,4 @@ export default async function RootLayout({
     </html>
   );
 }
+
