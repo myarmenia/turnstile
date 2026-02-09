@@ -15,8 +15,8 @@ const nextConfig: NextConfig = {
     },
 
     images: {
-        // domains: ['localhost'],
-        unoptimized: true,
+        domains: ['turnstile-admin.turniket.am'],
+        // unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'http',
