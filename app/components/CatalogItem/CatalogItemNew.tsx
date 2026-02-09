@@ -60,7 +60,7 @@ export default function CatalogItemNew({
             {/* CONTENT */}
             <div className="flex flex-col items-center gap-[10px] w-full justify-center p-[20px]">
               <h3 className="freeSans font_color font-normal text-[16px] leading-[19.2px] text-center">
-                {item.code} - {item.category_slug}
+                {item.code}
               </h3>
 
               <ButtonComponent
