@@ -776,6 +776,7 @@
         "productCode": "Код товара",
         "contactForPurchase": "Контакт для покупки",
         "contactDescription": "Позвоните для консультации и заказа",
-        "call": "Позвонить"
+        "call": "Позвонить",
+        "email": "Написать"
     }
 }

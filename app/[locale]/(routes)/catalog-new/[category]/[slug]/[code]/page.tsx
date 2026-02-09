@@ -321,7 +321,26 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                                 {tProduct('call')}
                                             </span>
                                         </a>
+
+                                        
                                     ))}
+
+                                    <a
+                                        href="mailto:info@webex.am"
+                                        className="flex items-center gap-2 p-2 bg-white rounded hover:bg-blue-50 transition-colors group"
+                                    >
+                                        <div className="w-6 h-6 flex items-center justify-center bg-purple-100 rounded-full group-hover:bg-purple-200 transition-colors">
+                                            <svg className="w-3 h-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                        <span className="text-sm font-medium text-gray-800">
+                                            info@webex.am
+                                        </span>
+                                        <span className="ml-auto text-blue-600 text-xs font-medium group-hover:text-blue-800">
+                                            {tProduct('email') || 'Email'}
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>

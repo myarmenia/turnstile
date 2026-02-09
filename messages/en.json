@@ -779,6 +779,7 @@
     "productCode": "Product code",
     "contactForPurchase": "Contact for purchase",
     "contactDescription": "Call for consultation and order",
-    "call": "Call"
+    "call": "Call",
+    "email": "Email"
   }
 }
