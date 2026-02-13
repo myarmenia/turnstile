@@ -778,5 +778,11 @@
         "contactDescription": "Позвоните для консультации и заказа",
         "call": "Позвонить",
         "email": "Написать"
+    },
+
+    "filter": {
+        "buttonFilter": "Поиск",
+        "searchText": "Поиск по коду...",
+        "allCategories": "Все категории"
     }
 }

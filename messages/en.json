@@ -781,5 +781,11 @@
     "contactDescription": "Call for consultation and order",
     "call": "Call",
     "email": "Email"
+  },
+
+  "filter": {
+    "buttonFilter": "Search",
+    "searchText": "Search by code...",
+    "allCategories": "All Categories"
   }
 }
