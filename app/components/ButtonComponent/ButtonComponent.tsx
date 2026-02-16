@@ -23,7 +23,6 @@ interface IButtonProps {
 const ButtonComponent = ({ name, path, bg, color, size, border = 'none', py, px, width, icon, customClass, redirect, order}: IButtonProps) => {
   const dispatch = useDispatch()
   const currentPath = path && path !== '/calendar' ? `${path}` : '';
-  console.log(currentPath,'666');
   
   const handleButtonClick = () => {
     if (redirect) {

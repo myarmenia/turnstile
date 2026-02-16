@@ -19,6 +19,12 @@ type Product = {
   [key: string]: string | number | boolean | undefined; // Для любых дополнительных полей
 };
 
+type Category = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
 // Обновляем тип параметров для generateMetadata
 type MetadataProps = {
   params: Promise<{ locale: string }>;
@@ -86,10 +92,45 @@ const localeMap: Record<string, string> = {
   en: "en",
 };
 
-async function getProducts(locale: string): Promise<Product[]> {
-  const apiLocale = localeMap[locale] ?? "en";
+
+async function getCategories(locale: string): Promise<Category[]> {
+  const apiLocale = localeMap[locale] ?? "am";
+
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/categories`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+        "Accept-Language": apiLocale,
+        Accept: "application/json",
+      },
+      cache: 'no-store',
+    }
+  );
+
+  if (!res.ok) {
+    console.error('CATEGORY API ERROR:', res.status);
+    return [];
+  }
+
+  const data = await res.json();
+  return data.data || [];
+}
+
+
+
+
+
+async function getProducts(locale: string, code?: string, category_id?: string): Promise<Product[]> {
+  const apiLocale = localeMap[locale] ?? "am";
+  const query = new URLSearchParams();
+  
+
+  if (code) query.append('code', code);
+  if (category_id) query.append('category_id', category_id);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/products?${query.toString()}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
@@ -118,14 +159,23 @@ async function getProducts(locale: string): Promise<Product[]> {
 // Обновляем тип параметров для компонента
 type PageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: {
+    code?: string;
+    category_id?: string;
+  };
 };
 
-export default async function CatalogPage({ params }: PageProps) {
+export default async function CatalogPage({ params, searchParams }: PageProps) {
   // Деструктурируем параметры с await
   const { locale } = await params;
 
   const t = await getTranslations('');
-  const products = await getProducts(locale);
+  
+
+  const [products, categories] = await Promise.all([
+    getProducts(locale, searchParams?.code, searchParams?.category_id),
+    getCategories(locale)
+  ]);
 
   const bannerContent = {
     title: t('TurnstileBanner.title'),
@@ -141,7 +191,7 @@ export default async function CatalogPage({ params }: PageProps) {
         page="catalog"
       />
 
-      <CatalogItemNew products={products} />
+      <CatalogItemNew products={products} categories={categories} />
     </div>
   );
 }

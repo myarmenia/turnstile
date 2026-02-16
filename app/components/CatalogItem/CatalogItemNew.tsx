@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
+import { filterProps } from 'framer-motion';
 
 type Product = {
   id: number;
@@ -14,14 +15,25 @@ type Product = {
   image: string;
 };
 
+type Category = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
+
 export default function CatalogItemNew({
   products,
+  categories
 }: {
-  products: Product[];
+    products: Product[];
+    categories: Category[];
 }) {
   const t = useTranslations('');
   const router = useRouter();
   const [lang, setLang] = useState('am');
+  const [code, setCode] = useState('');
+  const [category_id, setCategory] = useState('');
 
   useEffect(() => {
     const cookieLang =
@@ -33,8 +45,57 @@ export default function CatalogItemNew({
     setLang(cookieLang);
   }, []);
 
+  const applyFilter = () => {
+    const query = new URLSearchParams();
+
+    if (code) query.append('code', code);
+    if (category_id) query.append('category_id', category_id);
+
+    router.push(`/${lang}/catalog-new?${query.toString()}`);
+  };
+
   return (
     <div className="container pb-6 flex flex-col gap-7 items-end">
+
+
+      <div className="flex gap-4 w-full justify-center mb-6">
+
+        <input
+          type="text"
+          placeholder={t('filter.searchText')}
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          className="border p-2 rounded w-[200px]"
+        />
+
+        <select
+          value={category_id}
+          onChange={(e) => setCategory(e.target.value)}
+          className="border p-2 rounded"
+        >
+          <option value="">{t('filter.allCategories')}</option>
+
+          {categories.map(cat => (
+            <option key={cat.id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+
+        </select>
+
+        <button
+          onClick={applyFilter}
+          className="bg-[#5939F5] text-white px-4 rounded"
+        >
+          {t('filter.buttonFilter')}
+        </button>
+
+      </div>
+
+      
+      
+      
+      
       <div className="flex flex-wrap justify-center gap-[20px]">
         {products.map(item => (
           <div
