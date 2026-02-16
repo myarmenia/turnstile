@@ -8,7 +8,7 @@ import { selectIsOpenConsultingModal, selectOrderCode, toggleConsultingModal } f
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'sonner';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 
 interface InitialValues {
@@ -36,46 +36,184 @@ const ConsultingModal = () => {
   const validationSchema = Yup.object({
     fullName: Yup.string(),
     phone: Yup.string(),
-    email: Yup.string().email(t('validations.3')).required(t('validations.2')),
+    email: Yup.string().email(),
     time: Yup.string(),
     product: Yup.string(),
     description: Yup.string(),
   });
 
-  const handleSubmit = async(values: InitialValues, { resetForm }: FormikHelpers<InitialValues>) => {
-    console.log('Form Data:', values);
-    // Add your form submission logic here
+  const localeMap: Record<string, string> = {
+    am: "hy",
+    ru: "ru",
+    en: "en",
+  };
+
+  const locale = useLocale();
+
+  const mapBackendFieldToFormik = (field: string): string => {
+    const map: Record<string, string> = {
+      full_name: 'fullName',
+      phone_number: 'phone',
+      email: 'email',
+      product_code: 'product',
+    };
+
+    return map[field] ?? field;
+  };
+
+
+
+  const handleSubmit = async (
+    values: InitialValues,
+    { resetForm, setErrors }: FormikHelpers<InitialValues>
+  ) => {
     try {
-      const sendMessage = {
+      const payload = {
         full_name: values.fullName,
-        phone: values.phone,
+        phone_number: values.phone,
         email: values.email,
-        product: orderCode,
-        description: values.description,
-        comfort_time: values.time
+        product_code: orderCode || '', // обязательно передаем хотя бы пустую строку
+        message: values.description,
+        preferred_time: values.time,
       };
 
-      await axios.post('https://backend.turniket.am/send-email', sendMessage);
+      const apiLocale = localeMap[locale] ?? 'hy';
 
-      // 🔹 Отправляем событие в Google Analytics
-      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-        window.gtag('event', 'form_submission', {
-          event_category: 'Contact',
-          event_label: orderCode || 'Unknown product',
-          value: 1
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/order-email`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+          'Content-Type': 'application/json',
+          'Accept-Language': apiLocale,
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+        cache: 'no-store',
+      });
+
+      const data = await res.json();
+
+      if (res.status === 422 && data?.errors) {
+        const formikErrors: Record<string, string> = {};
+        Object.entries(data.errors).forEach(([field, messages]) => {
+          const formikField = mapBackendFieldToFormik(field);
+          formikErrors[formikField] = (messages as string[])[0];
         });
+        setErrors(formikErrors);
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error('API request failed');
       }
 
       resetForm();
       toast.success(t('message.success'));
-      dispatch(toggleConsultingModal({isview:false, orderCode: ''}))
+      dispatch(toggleConsultingModal({ isview: false, orderCode: '' }));
 
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Submit error:', error);
       toast.error(t('message.error'));
     }
-    
   };
+  
+
+  // const handleSubmit = async (
+  //   values: InitialValues,
+  //   { resetForm }: FormikHelpers<InitialValues>
+  // ) => {
+  //   try {
+  //     const payload = {
+  //       full_name: values.fullName,
+  //       phone: values.phone,
+  //       email: values.email,
+  //       product: orderCode,
+  //       description: values.description,
+  //       comfort_time: values.time,
+  //     };
+
+  //     const apiLocale = localeMap[locale] ?? "am";
+
+  //     const res = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/api/order-email`,
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+  //           'Content-Type': 'application/json',
+  //           'Accept-Language': apiLocale,
+  //           Accept: 'application/json',
+            
+  //         },
+  //         body: JSON.stringify(payload),
+  //         cache: 'no-store',
+  //       }
+  //     );
+
+  //     if (!res.ok) {
+  //       console.error('API ERROR:', res.status);
+  //       throw new Error('Request failed');
+  //     }
+
+  //     // если нужен ответ
+  //     // const data = await res.json();
+
+  //     // 🔹 Google Analytics
+  //     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+  //       window.gtag('event', 'form_submission', {
+  //         event_category: 'Contact',
+  //         event_label: orderCode || 'Unknown product',
+  //         value: 1,
+  //       });
+  //     }
+
+  //     resetForm();
+  //     toast.success(t('message.success'));
+  //     dispatch(toggleConsultingModal({ isview: false, orderCode: '' }));
+
+  //   } catch (error) {
+  //     console.error('Error sending email:', error);
+  //     toast.error(t('message.error'));
+  //   }
+  // };
+
+
+
+
+  // const handleSubmit = async(values: InitialValues, { resetForm }: FormikHelpers<InitialValues>) => {
+  //   console.log('Form Data:', values);
+  //   // Add your form submission logic here
+  //   try {
+  //     const sendMessage = {
+  //       full_name: values.fullName,
+  //       phone: values.phone,
+  //       email: values.email,
+  //       product: orderCode,
+  //       description: values.description,
+  //       comfort_time: values.time
+  //     };
+
+  //     await axios.post('https://backend.turniket.am/send-email', sendMessage);
+
+  //     // 🔹 Отправляем событие в Google Analytics
+  //     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+  //       window.gtag('event', 'form_submission', {
+  //         event_category: 'Contact',
+  //         event_label: orderCode || 'Unknown product',
+  //         value: 1
+  //       });
+  //     }
+
+  //     resetForm();
+  //     toast.success(t('message.success'));
+  //     dispatch(toggleConsultingModal({isview:false, orderCode: ''}))
+
+  //   } catch (error) {
+  //     console.error('Error sending email:', error);
+  //     toast.error(t('message.error'));
+  //   }
+    
+  // };
 
   return (
     <div style={{display: isOpenModal ? 'flex' : 'none'}} className='consulting_modal fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-55 flex justify-center items-center z-[99999999] max-sm:items-start'>
@@ -96,6 +234,12 @@ const ConsultingModal = () => {
                     type="text"
                     className="border border-[#0E0449] h-[48px] w-[310px] max-md:w-[500px] max-sm:w-[300px] outline-none rounded pl-[15px] max-sm:h-[6vh]"
                   />
+
+                <ErrorMessage
+                  name="fullName"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
                 </div>
 
                 <div className="flex flex-col gap-[10px]">
@@ -106,6 +250,12 @@ const ConsultingModal = () => {
                     name="phone"
                     type="text"
                     className="border border-[#0E0449] h-[48px] w-[310px] max-md:w-[500px] max-sm:w-[300px] outline-none rounded pl-[15px] max-sm:h-[6vh]"
+                  />
+
+                  <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="text-red-500 text-sm"
                   />
                 </div>
               </div>
