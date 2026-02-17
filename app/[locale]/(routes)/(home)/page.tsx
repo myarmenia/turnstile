@@ -4,7 +4,7 @@ import InfoServices from '@/app/components/InfoServices/InfoServices';
 import CategorySection from '@/app/components/CategorySection/CategorySection';
 import OurProductsSection from '@/app/components/OurProductsSection/OurProductsSection';
 import DeviceSection from '@/app/components/DeviceSection/DeviceSection';
-import ContactSection from '@/app/components/ContactSection/ContactSection';
+// import ContactSection from '@/app/components/ContactSection/ContactSection';
 import { Metadata } from 'next';
 import PartnersComponent from '@/app/components/PartnersComponent/PartnersComponent';
 import PeoplesCommentsComponent from '@/app/components/PeoplesCommentsComponent/PeoplesCommentsComponent';
@@ -55,7 +55,7 @@ const HomePage = async () => {
       <OurProductsSection />
       <DeviceSection title="titleHomePage" description="descriptionHomePage" />
       <PeoplesCommentsComponent/>
-      <ContactSection />
+      {/* <ContactSection /> */}
     </div>
   )
 }

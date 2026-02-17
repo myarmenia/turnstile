@@ -1,5 +1,5 @@
 import AdminPanelScreenSection from '@/app/components/AdminPanelScreenSection/AdminPanelScreenSection'
-import ContactSection from '@/app/components/ContactSection/ContactSection'
+// import ContactSection from '@/app/components/ContactSection/ContactSection'
 import DeviceSection from '@/app/components/DeviceSection/DeviceSection'
 import MadeInArmeniaSection from '@/app/components/MadeInArmeniaSection/MadeInArmeniaSection'
 import OurProductsSection from '@/app/components/OurProductsSection/OurProductsSection'
@@ -114,7 +114,7 @@ const TurnstilePage = () => {
       <AdminPanelScreenSection />
       <DeviceSection title="titleTurnstilePage" description="descriptionTurnstilePage" />
       <OurWorksSection />
-      <ContactSection />
+      {/* <ContactSection /> */}
     </div>
   );
 };
