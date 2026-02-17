@@ -144,9 +144,7 @@
     },
     "ContactSection": {
         "captcha": {
-            "text1": "Перетащите кнопку для проверки",
-            "text2": "CAPTCHA выполнена",
-            "not_completed": "CAPTCHA не выполнена"
+            "required": "Пожалуйста, подтвердите, что вы не робот"
         },
         "title": "Заполните поля, чтобы получить консультацию.",
         "placeholders": [
@@ -784,5 +782,7 @@
         "buttonFilter": "Поиск",
         "searchText": "Поиск по коду...",
         "allCategories": "Все категории"
-    }
+    }   
+    
+    
 }

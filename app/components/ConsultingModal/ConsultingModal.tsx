@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { useTranslations, useLocale } from 'next-intl';
-
-
+import ReCAPTCHA from "react-google-recaptcha";
+import { useState } from "react";
 interface InitialValues {
   fullName: string;
   phone: string;
@@ -24,6 +24,8 @@ const ConsultingModal = () => {
   const orderCode = useSelector(selectOrderCode)
   const dispatch = useAppDispatch()
   const t = useTranslations('ContactSection');
+  const [captchaToken, setCaptchaToken] = useState<string>("");
+
   const initialValues = {
     fullName: '',
     phone: '',
@@ -68,6 +70,12 @@ const ConsultingModal = () => {
     { resetForm, setErrors }: FormikHelpers<InitialValues>
   ) => {
     try {
+
+      if (!captchaToken) {
+        toast.error(t('captcha.required'));
+        return;
+      }
+
       const payload = {
         full_name: values.fullName,
         phone_number: values.phone,
@@ -75,6 +83,7 @@ const ConsultingModal = () => {
         product_code: orderCode || '', // обязательно передаем хотя бы пустую строку
         message: values.description,
         preferred_time: values.time,
+        captcha: captchaToken,
       };
 
       const apiLocale = localeMap[locale] ?? 'hy';
@@ -118,102 +127,7 @@ const ConsultingModal = () => {
   };
   
 
-  // const handleSubmit = async (
-  //   values: InitialValues,
-  //   { resetForm }: FormikHelpers<InitialValues>
-  // ) => {
-  //   try {
-  //     const payload = {
-  //       full_name: values.fullName,
-  //       phone: values.phone,
-  //       email: values.email,
-  //       product: orderCode,
-  //       description: values.description,
-  //       comfort_time: values.time,
-  //     };
-
-  //     const apiLocale = localeMap[locale] ?? "am";
-
-  //     const res = await fetch(
-  //       `${process.env.NEXT_PUBLIC_API_URL}/api/order-email`,
-  //       {
-  //         method: 'POST',
-  //         headers: {
-  //           Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
-  //           'Content-Type': 'application/json',
-  //           'Accept-Language': apiLocale,
-  //           Accept: 'application/json',
-            
-  //         },
-  //         body: JSON.stringify(payload),
-  //         cache: 'no-store',
-  //       }
-  //     );
-
-  //     if (!res.ok) {
-  //       console.error('API ERROR:', res.status);
-  //       throw new Error('Request failed');
-  //     }
-
-  //     // если нужен ответ
-  //     // const data = await res.json();
-
-  //     // 🔹 Google Analytics
-  //     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-  //       window.gtag('event', 'form_submission', {
-  //         event_category: 'Contact',
-  //         event_label: orderCode || 'Unknown product',
-  //         value: 1,
-  //       });
-  //     }
-
-  //     resetForm();
-  //     toast.success(t('message.success'));
-  //     dispatch(toggleConsultingModal({ isview: false, orderCode: '' }));
-
-  //   } catch (error) {
-  //     console.error('Error sending email:', error);
-  //     toast.error(t('message.error'));
-  //   }
-  // };
-
-
-
-
-  // const handleSubmit = async(values: InitialValues, { resetForm }: FormikHelpers<InitialValues>) => {
-  //   console.log('Form Data:', values);
-  //   // Add your form submission logic here
-  //   try {
-  //     const sendMessage = {
-  //       full_name: values.fullName,
-  //       phone: values.phone,
-  //       email: values.email,
-  //       product: orderCode,
-  //       description: values.description,
-  //       comfort_time: values.time
-  //     };
-
-  //     await axios.post('https://backend.turniket.am/send-email', sendMessage);
-
-  //     // 🔹 Отправляем событие в Google Analytics
-  //     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-  //       window.gtag('event', 'form_submission', {
-  //         event_category: 'Contact',
-  //         event_label: orderCode || 'Unknown product',
-  //         value: 1
-  //       });
-  //     }
-
-  //     resetForm();
-  //     toast.success(t('message.success'));
-  //     dispatch(toggleConsultingModal({isview:false, orderCode: ''}))
-
-  //   } catch (error) {
-  //     console.error('Error sending email:', error);
-  //     toast.error(t('message.error'));
-  //   }
-    
-  // };
+  
 
   return (
     <div style={{display: isOpenModal ? 'flex' : 'none'}} className='consulting_modal fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-55 flex justify-center items-center z-[99999999] max-sm:items-start'>
@@ -311,6 +225,11 @@ const ConsultingModal = () => {
                   className="w-[640px] max-md:w-[500px] max-sm:w-[300px] h-[140px] border border-[#0E0449] rounded outline-none pl-[15px] max-sm:h-[14vh]"
                 />
               </div>
+
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!} // твой публичный ключ
+                onChange={(token) => setCaptchaToken(token)}
+              />
 
               <button
                 type="submit"

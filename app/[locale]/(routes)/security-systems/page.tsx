@@ -6,7 +6,7 @@ import SecurityInfoSection from '@/app/components/SecurityInfoSection/SecurityIn
 import WhyChooseUsSection from '@/app/components/WhyChooseUsSection/WhyChooseUsSection';
 import MobileAppSection from '@/app/components/MobileAppSection/MobileAppSection';
 import FrequentlyAsked from '@/app/components/FrequentlyAsked/FrequentlyAsked';
-import ContactSection from '@/app/components/ContactSection/ContactSection';
+// import ContactSection from '@/app/components/ContactSection/ContactSection';
 import { useTranslations } from 'next-intl';
 import { Metadata } from 'next';
 
@@ -66,7 +66,7 @@ const SecuritySystems = () => {
                 <WhyChooseUsSection />
                 <MobileAppSection />
                 <FrequentlyAsked />
-                <ContactSection />
+                {/* <ContactSection /> */}
             </div>
     );
 };

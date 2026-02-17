@@ -144,9 +144,7 @@
   },
   "ContactSection": {
     "captcha": {
-      "text1": "Slide the button to verify",
-      "text2": "CAPTCHA completed",
-      "not_completed": "CAPTCHA not completed"
+      "required": "Please confirm that you are not a robot"
     },
     "title": "Fill in the fields to get a consultation.",
     "placeholders": [
@@ -788,4 +786,6 @@
     "searchText": "Search by code...",
     "allCategories": "All Categories"
   }
+
+  
 }
