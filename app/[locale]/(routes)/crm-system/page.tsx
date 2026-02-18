@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Metadata } from 'next';
 import { QrScanSection } from '@/app/components/QrScanSection/QrScanSection'
 
+
 export const metadata: Metadata = {
     title: 'CRM Համակարգ | Crm Systems | CRM Система',
     description: '111 Մենք առաջարկում ենք բարձրորակ անվտանգության համակարգեր՝ նախատեսված ձեր բիզնեսի և տան պահանջներին համապատասխան: Մեր լուծումները ներառում են վիդեոհսկողություն, մուտքի վերահսկում, հրդեհային ահազանգեր և այլն: Ժամանակակից տեխնոլոգիաներ, մասնագիտական տեղադրում և աջակցություն: Наши решения включают видеонаблюдение, контроль доступа, пожарную сигнализацию и многое другое. Современные технологии, профессиональная установка и поддержка. We offer high-quality security systems tailored to your business and home needs. Our solutions include video surveillance, access control, fire alarms, and more. Modern technologies, professional installation, and support. turniket gnel | turniketner vacharq | mutqi hamakarg | տուռնիկետ տուռնիկետների վաճառք | տուռնիկետներ գնել մուտքի համակարգ | անվտանգության համակարգ | турникеты ереван | турникет | купить турникет | продажа турникетов | система безопасности',
@@ -44,6 +45,7 @@ interface IContent {
     title: string;
     description: string;
     btn: string;
+    btnWhite: boolean
 }
 
 const CRMSystem = () => {
@@ -51,7 +53,8 @@ const CRMSystem = () => {
     const content: IContent = {
         title: t("title"),
         description: t("description"),
-        btn: t("btn")
+        btn: t("btn"),
+        btnWhite: true
     };
 
     return (

@@ -23,7 +23,8 @@
     "smart-home": "Smart Home",
     "about-us": "About Us",
     "catalog": "Our Products",
-    "crm-system": "CRM System"
+    "crm-system": "CRM System",
+    "contact-us": "Contact Us"
   },
   "NavTop": {
     "address": "Baghramyan st. 79, 1/1"
@@ -146,29 +147,43 @@
     "captcha": {
       "required": "Please confirm that you are not a robot"
     },
-    "title": "Fill in the fields to get a consultation.",
+    "title": "Contact Us",
     "placeholders": [
-      "Full Name*",
-      "Phone number*",
-      "Email*",
-      "Organization name",
+      "Full Name",
+      "Phone",
+      "Email",
+      "Organization",
       "Attach file",
-      "Description",
-      "Choose a time that suits you.",
-      "Product",
       "Message",
-      "Send"
+      "Preferred Time",
+      "Product Code",
+      "Message",
+      "Send Message"
     ],
     "validations": [
-      "Full Name is required!",
-      "Phone number is required!",
-      "Email is required!",
-      "Email format is incorrect."
+      "Full name is required",
+      "Phone number is required",
+      "Email is required",
+      "Invalid email address"
     ],
-    "btn": "Get a free consultation",
+    "captcha1": {
+      "text1": "Slide to verify",
+      "text2": "Verified",
+      "not_completed": "Please complete the verification"
+    },
     "message": {
-      "success": "Your application has been successfully sent.",
-      "error": "Something is wrong."
+      "success": "Your message has been sent successfully",
+      "error": "Something went wrong. Please try again"
+    },
+    "contactInfo": {
+      "title": "Contact Information",
+      "address_label": "Address",
+      "address": "Yerevan, Armenia",
+      "phone_label": "Phone",
+      "email_label": "Email",
+      "working_hours_label": "Working hours",
+      "working_hours": "Mon–Fri 09:00–18:00",
+      "map": "Map Location"
     }
   },
   "FrequentlyAsked": {

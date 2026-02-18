@@ -28,6 +28,7 @@ interface IBannerContent {
   title: string;
   description: string;
   btn: string;
+  btnWhite: boolean;
 }
 
 export const metadata: Metadata = {
@@ -69,7 +70,8 @@ const TurnstilePage = () => {
   const bannerContent: IBannerContent = {
     title: t('TurnstileBanner.title'),
     description: t('TurnstileBanner.content'),
-    btn: t('TurnstileBanner.see_more_btn')
+    btn: t('TurnstileBanner.see_more_btn'),
+    btnWhite: true
   };
 
 
