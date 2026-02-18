@@ -48,6 +48,8 @@ interface IContent {
     title: string;
     description: string;
     btn: string;
+    btnWhite: boolean
+
 }
 
 const SecuritySystems = () => {
@@ -55,7 +57,9 @@ const SecuritySystems = () => {
     const content: IContent = {
         title: t("title"),
         description: t("description"),
-        btn: t("btn")
+        btn: t("btn"),
+        btnWhite: true
+
     };
 
     return (

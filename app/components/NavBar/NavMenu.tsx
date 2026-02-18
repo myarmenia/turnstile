@@ -13,6 +13,8 @@ const NavMenu = () => {
         <NavMenuItem name={t('about-us')} path="/about-us" /> */}
         <NavMenuItem name={t('catalog')} path="/catalog" />
         <NavMenuItem name={t('crm-system')} path="/crm-system" />
+        <NavMenuItem name={t('contact-us')} path="/contact-us" />
+
     </ul>
   )
 }

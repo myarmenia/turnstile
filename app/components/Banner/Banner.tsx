@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import ButtonParrentComponent from "../ButtonParrentComponent/ButtonParrentComponent";
 import BannerList from "../BannerList/BannerList";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
+import { FaFileAlt, FaImages, FaVideo } from 'react-icons/fa';
 
 interface BannerItem {
   id: string;
@@ -14,6 +15,7 @@ interface IContent {
   title: string;
   description: string;
   btn: string;
+  btnWhite: boolean
 }
 
 interface BannerProps {
@@ -30,13 +32,13 @@ const Banner: React.FC<BannerProps> = ({ bannerData, bg, content, page }) => {
     <div
       className={`w-full ${
         page === "turnstile"
-          ? "min-h-[850px] max-sm:min-h-[950px]"
-          : "min-h-[750px] max-sm:min-h-[750px]"
+          ? "min-h-[580px] max-sm:min-h-[650px]"
+          : "min-h-[480px] max-sm:min-h-[480px]"
       }`}
     >
       <div
         style={{ backgroundImage: `url(${bg})` }}
-        className={`w-full min-h-[650px] bg-cover bg-no-repeat bg-white bg-center max-md:p-2 relative ${
+        className={`w-full min-h-[400px] bg-cover bg-no-repeat bg-white bg-center max-md:p-2 relative ${
           page === "catalog" ? "flex items-center" : ""
         }`}
       >
@@ -53,7 +55,7 @@ const Banner: React.FC<BannerProps> = ({ bannerData, bg, content, page }) => {
           <BannerList />
         ) : (
           <div className="container h-full relative z-10">
-            <div className="max-w-[530px] flex flex-col gap-[30px] h-full pt-[120px] px-[50px] max-sm:px-2">
+            <div className="max-w-[530px] flex flex-col gap-[30px] h-full pt-[20px] px-[50px] max-sm:px-2">
               <h1 className="text-white text-[40px] max-md:text-[30px] leading-[48px] font-normal Arm_Hmks_Bebas_Neue">
                 {content.title}
               </h1>
@@ -63,9 +65,12 @@ const Banner: React.FC<BannerProps> = ({ bannerData, bg, content, page }) => {
 
               {/* Buttons */}
               <div className="flex items-center gap-3">
-                <ButtonParrentComponent btnText={content.btn} />
+                {/* <ButtonParrentComponent btnText={content.btn} /> */}
+                  {content.btn && content.btn.trim() !== "" && (
+                    <ButtonParrentComponent btnText={content.btn} />
+                  )}
 
-                <ButtonComponent
+                {/* <ButtonComponent
                   name={t("dawnload_pdf_btn")}
                   bg="#ffff"
                   color="#00000"
@@ -73,7 +78,19 @@ const Banner: React.FC<BannerProps> = ({ bannerData, bg, content, page }) => {
                   py="7px"
                   px="15px"
                   order="0"
-                />
+                /> */}
+                  
+                  {content.btnWhite && (
+                    <ButtonComponent
+                      name={t("dawnload_pdf_btn")}
+                      bg="#ffff"
+                      color="#00000"
+                      size="16px"
+                      py="7px"
+                      px="15px"
+                      order="0"
+                    />
+                  )}
               </div>
             </div>
           </div>
@@ -82,7 +99,7 @@ const Banner: React.FC<BannerProps> = ({ bannerData, bg, content, page }) => {
 
       {/* Additional Section */}
       {bannerData && (
-        <div className="max-sm:w-full max-w-[800px] flex items-center max-sm:flex-wrap justify-center gap-[20px] absolute left-[50%] max-sm:bottom-[-450px] transform -translate-x-[50%] -translate-y-[50%] max-sm:-translate-x-0 max-sm:-translate-y-0 max-sm:static max-sm:left-0 py-4 px-6">
+        <div className="max-sm:w-full max-w-[800px] flex items-center max-sm:flex-wrap justify-center gap-[20px] absolute left-[50%] max-sm:bottom-[-450px] transform -translate-x-[50%] -translate-y-[50%] max-sm:-translate-x-0 max-sm:-translate-y-0 max-sm:static max-sm:left-0 pt-24 max-sm:py-6 px-6">
           {bannerData.map((item) => (
             <div
               key={item.id}
