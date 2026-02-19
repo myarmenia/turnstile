@@ -1,5 +1,5 @@
 import AdminPanelScreenSection from '@/app/components/AdminPanelScreenSection/AdminPanelScreenSection'
-import ContactSection from '@/app/components/ContactSection/ContactSection'
+// import ContactSection from '@/app/components/ContactSection/ContactSection'
 import DeviceSection from '@/app/components/DeviceSection/DeviceSection'
 import MadeInArmeniaSection from '@/app/components/MadeInArmeniaSection/MadeInArmeniaSection'
 import OurProductsSection from '@/app/components/OurProductsSection/OurProductsSection'
@@ -28,6 +28,7 @@ interface IBannerContent {
   title: string;
   description: string;
   btn: string;
+  btnWhite: boolean;
 }
 
 export const metadata: Metadata = {
@@ -69,7 +70,8 @@ const TurnstilePage = () => {
   const bannerContent: IBannerContent = {
     title: t('TurnstileBanner.title'),
     description: t('TurnstileBanner.content'),
-    btn: t('TurnstileBanner.see_more_btn')
+    btn: t('TurnstileBanner.see_more_btn'),
+    btnWhite: true
   };
 
 
@@ -114,7 +116,7 @@ const TurnstilePage = () => {
       <AdminPanelScreenSection />
       <DeviceSection title="titleTurnstilePage" description="descriptionTurnstilePage" />
       <OurWorksSection />
-      <ContactSection />
+      {/* <ContactSection /> */}
     </div>
   );
 };

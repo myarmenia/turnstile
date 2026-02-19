@@ -6,7 +6,7 @@ import SecurityInfoSection from '@/app/components/SecurityInfoSection/SecurityIn
 import WhyChooseUsSection from '@/app/components/WhyChooseUsSection/WhyChooseUsSection';
 import MobileAppSection from '@/app/components/MobileAppSection/MobileAppSection';
 import FrequentlyAsked from '@/app/components/FrequentlyAsked/FrequentlyAsked';
-import ContactSection from '@/app/components/ContactSection/ContactSection';
+// import ContactSection from '@/app/components/ContactSection/ContactSection';
 import { useTranslations } from 'next-intl';
 import { Metadata } from 'next';
 
@@ -48,6 +48,8 @@ interface IContent {
     title: string;
     description: string;
     btn: string;
+    btnWhite: boolean
+
 }
 
 const SecuritySystems = () => {
@@ -55,7 +57,9 @@ const SecuritySystems = () => {
     const content: IContent = {
         title: t("title"),
         description: t("description"),
-        btn: t("btn")
+        btn: t("btn"),
+        btnWhite: true
+
     };
 
     return (
@@ -66,7 +70,7 @@ const SecuritySystems = () => {
                 <WhyChooseUsSection />
                 <MobileAppSection />
                 <FrequentlyAsked />
-                <ContactSection />
+                {/* <ContactSection /> */}
             </div>
     );
 };
