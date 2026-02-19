@@ -184,12 +184,12 @@ export default async function CatalogPage({ params, searchParams }: PageProps) {
   };
 
   return (
-    <div className="turnstile_page">
-      <Banner
+    <div className="turnstile_page mt-8">
+      {/* <Banner
         bg={catalogBanner.src}
         content={bannerContent}
         page="catalog"
-      />
+      /> */}
 
       <CatalogItemNew products={products} categories={categories} />
     </div>

@@ -45,7 +45,7 @@ const HomePageBanner: React.FC  = () => {
         },
       ];
     return (
-        <div className="home_page_banner h-[770px] bg-white">
+        <div className="home_page_banner h-[650px] bg-white !rounded-none">
             <Swiper
                 modules={[Pagination, Navigation, Autoplay]} 
                 pagination={{ clickable: true }}
@@ -55,13 +55,13 @@ const HomePageBanner: React.FC  = () => {
                     delay: 3000, 
                     disableOnInteraction: false, 
                 }}
-                className="h-[670px] w-full"
+                className="h-[430px] w-full rounded-none"
             >
                 {bannerSliderData.map((item) => (
                     <SwiperSlide key={item.id}>
-                        <div style={{ backgroundImage: `url(${item.image})` }} className="relative h-full w-full bg-cover bg-no-repeat bg-center ">
-                            <div className="container h-full">
-                                <div className="max-w-[630px] flex flex-col gap-[30px] h-full pt-[120px] px-[70px] max-sm:px-2 items-start">
+                        <div style={{ backgroundImage: `url(${item.image})` }} className="rounded-none relative h-full w-full bg-cover bg-no-repeat bg-center ">
+                            <div className="rounded-none container h-full flex items-center">
+                                <div className="rounded-none max-w-[530px] flex flex-col gap-[30px]  px-[50px] max-sm:px-2 items-start">
                                     <h1 className="text-white text-[40px] max-md:text-[30px] leading-[48px] font-normal Arm_Hmks_Bebas_Neue">
                                         {item.title}
                                     </h1>

@@ -49,7 +49,7 @@ interface TabProps {
 // Удаляем productName из параметров
 const ProductTabs = ({ data }: TabProps) => {
     const t = useTranslations('ProductTabs');
-    const [activeTab, setActiveTab] = useState('description');
+    const [activeTab, setActiveTab] = useState('specifications');
 
     // Функция для получения alt для изображений
     const getImageAlt = (image: ImageData, index: number): string => {
@@ -67,18 +67,18 @@ const ProductTabs = ({ data }: TabProps) => {
     };
 
     const tabs = [
-        {
-            id: 'description',
-            label: t('description'),
-            icon: <MdDescription />,
-            content: data.description && (
-                <div
-                    className="bg-gray-50 p-6 rounded-lg"
-                    dangerouslySetInnerHTML={{ __html: data.description }}
-                />
-            ),
-            visible: !!data.description
-        },
+        // {
+        //     id: 'description',
+        //     label: t('description'),
+        //     icon: <MdDescription />,
+        //     content: data.description && (
+        //         <div
+        //             className="bg-gray-50 p-6 rounded-lg"
+        //             dangerouslySetInnerHTML={{ __html: data.description }}
+        //         />
+        //     ),
+        //     visible: !!data.description
+        // },
         {
             id: 'specifications',
             label: t('specifications'),
@@ -131,6 +131,7 @@ const ProductTabs = ({ data }: TabProps) => {
                                     title={getVideoTitle(video, index)}
                                     poster={video.thumbnail}
                                     preload="metadata"
+                                    autoPlay
                                 />
                             </div>
                             {(video.title || video.description) && (
