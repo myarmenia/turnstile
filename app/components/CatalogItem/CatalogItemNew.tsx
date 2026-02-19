@@ -58,20 +58,20 @@ export default function CatalogItemNew({
     <div className="container pb-6 flex flex-col gap-7 items-end">
 
 
-      <div className="flex gap-4 w-full justify-center mb-6">
+      <div className="flex gap-4 w-full justify-end mb-6">
 
         <input
           type="text"
           placeholder={t('filter.searchText')}
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          className="border p-2 rounded w-[200px]"
+          className="border p-2 rounded w-[360px]"
         />
 
         <select
           value={category_id}
           onChange={(e) => setCategory(e.target.value)}
-          className="border p-2 rounded"
+          className="border p-2 rounded  w-[360px]"
         >
           <option value="">{t('filter.allCategories')}</option>
 

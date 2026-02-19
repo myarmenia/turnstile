@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import Banner from '@/app/components/Banner/Banner';
 import ContactSection from '@/app/components/ContactSection/ContactSection';
@@ -65,10 +66,15 @@ type ContactPageProps = {
     params: { locale: keyof typeof titles };
 };
 
+
 export default async function ContactPage({ params }: ContactPageProps) {
     const locale = params.locale;
     const title = titles[locale] || titles.en;
     const description = descriptions[locale] || descriptions.en;
+    const t = await getTranslations();
+
+    const btn = t('TurnstileBanner.see_more_btn');
+
 
     return (
         <div >
@@ -77,7 +83,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
                 content={{
                     title,
                     description,
-                    btn: "",
+                    btn,
                     btnWhite: false
 
                 }}
