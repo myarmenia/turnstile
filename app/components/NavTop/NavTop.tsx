@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 const NavTop = () => {
   const t = useTranslations('NavTop');
   return (
-    <div className="relative h-[100px] md:h-[56px] bg-[#5939F5] max-md:py-2 max-lg:hidden">
+    <div className="relative h-[80px] md:h-[34px] bg-[#5939F5] max-md:py-2 max-lg:hidden">
       <div className="container flex justify-between items-center h-full px-2 md:px-12 max-md:flex-col max-md:justify-center max-md:items-start gap-2">
 
         {/* Location Section */}

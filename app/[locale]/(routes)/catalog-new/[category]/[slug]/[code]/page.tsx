@@ -21,6 +21,7 @@ interface ProductAPIResponse {
     slug: string;
     name: string;
     description: string;
+    short_description: string;
     specifications?: string;
     code: string;
     category_slug: string;
@@ -195,7 +196,7 @@ const SingleProductPage = async ({ params }: PageProps) => {
     };
 
     const advantages = extractAdvantages(product.description);
-
+    console.log(advantages)
     // Подготовка данных для табов
     const tabsData = {
         description: product.description,
@@ -209,7 +210,7 @@ const SingleProductPage = async ({ params }: PageProps) => {
     return (
         <div className="one_product_page container py-6 px-4 flex flex-col gap-10">
             {/* ===== MAIN IMAGE + INFO ===== */}
-            <div className="flex max-md:flex-col justify-between gap-10 items-stretch min-h-[600px] max-md:min-h-0">
+            <div className="flex max-md:flex-col justify-between gap-10 items-stretch min-h-[568px] max-md:min-h-0">
 
                 {/* LEFT: IMAGE SECTION WITH SLIDER */}
                 <div className="w-[48%] max-md:w-full flex flex-col">
@@ -243,13 +244,13 @@ const SingleProductPage = async ({ params }: PageProps) => {
                         </h1>
 
                         {/* Основные преимущества */}
-                        <div className="mb-6 flex-grow">
+                        <div className="flex-grow">
                             <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
                                 <FaCheckCircle className="text-green-500" />
                                 {tProduct('mainAdvantages')}
                             </h3>
 
-                            {advantages.length > 0 ? (
+                            {/* {advantages.length > 0 ? (
                                 <ul className="space-y-2">
                                     {advantages.map((advantage, index) => (
                                         <li key={index} className="flex items-start gap-2">
@@ -264,7 +265,17 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                         dangerouslySetInnerHTML={{ __html: product.description }}
                                     />
                                 </div>
-                            )}
+                            )} */}
+
+
+                            
+                                <div className="bg-gray-50 p-3 rounded-lg">
+                                    <div
+                                        className="text-gray-700 text-sm"
+                                        dangerouslySetInnerHTML={{ __html: product.short_description }}
+                                    />
+                                </div>
+                            
                         </div>
 
                         {/* Категория и Код товара */}
@@ -294,9 +305,9 @@ const SingleProductPage = async ({ params }: PageProps) => {
                         <div className="mb-4">
                             <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
                                 <div className="flex items-center gap-2 mb-3">
-                                    <div className="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
+                                    {/* <div className="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
                                         <FaPhone className="text-blue-600 text-sm" />
-                                    </div>
+                                    </div> */}
                                     <div>
                                         <h4 className="text-sm font-semibold text-gray-800">
                                             {tProduct('contactForPurchase')}
@@ -304,7 +315,7 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
+                                <div className="flex items-center gap-2">
                                     {phoneNumbers[apiLocale as keyof typeof phoneNumbers]?.map((phone, index) => (
                                         <a
                                             key={index}
@@ -317,9 +328,9 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                             <span className="text-sm font-medium text-gray-800">
                                                 {phone}
                                             </span>
-                                            <span className="ml-auto text-blue-600 text-xs font-medium group-hover:text-blue-800">
+                                            {/* <span className="ml-auto text-blue-600 text-xs font-medium group-hover:text-blue-800">
                                                 {tProduct('call')}
-                                            </span>
+                                            </span> */}
                                         </a>
 
                                         
@@ -337,9 +348,9 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                         <span className="text-sm font-medium text-gray-800">
                                             info@webex.am
                                         </span>
-                                        <span className="ml-auto text-blue-600 text-xs font-medium group-hover:text-blue-800">
+                                        {/* <span className="ml-auto text-blue-600 text-xs font-medium group-hover:text-blue-800">
                                             {tProduct('email') || 'Email'}
-                                        </span>
+                                        </span> */}
                                     </a>
                                 </div>
                             </div>
@@ -364,7 +375,7 @@ const SingleProductPage = async ({ params }: PageProps) => {
             </div>
 
             {/* ТАБЫ */}
-            <div className="mt-8">
+            <div className="">
                 <ProductTabs
                     data={tabsData}
                     // productName={product.name}
