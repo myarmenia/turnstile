@@ -18,11 +18,11 @@ const NavBar = () => {
       }, []);
     
     return (
-        <div className=' bg-white h-[96px] sticky top-0 z-50 border-b border-gray-200'>
+        <div className=' bg-white h-[66px] sticky top-0 z-50 border-b border-gray-200'>
             <div className='container flex justify-between items-center h-full max-lg:px-[20px] xl:px-[40px]'>
                 <div className='h-full flex items-center gap-[40px]'>
                     {/* Logo */}
-                    <Link className="flex items-center w-[80px]" href={`/${lang}`}>
+                    <Link className="flex items-center w-[54px]" href={`/${lang}`}>
                         <Image src={logo} alt="Webex" className='w-full'/>
                     </Link>
 

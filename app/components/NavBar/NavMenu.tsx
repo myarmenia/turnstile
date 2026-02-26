@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 const NavMenu = () => {
   const t = useTranslations('NavMenu')
   return (
-    <ul className='hidden lg:flex h-full items-center gap-[20px]'>
+    <ul className='hidden lg:flex h-full items-center gap-[18px]'>
         <NavMenuItem name={t('home')} path="/" />
         <NavMenuItem name={t('turnstile')} path="/turnstile" />
         <NavMenuItem name={t('security-systems')} path="/security-systems" />
