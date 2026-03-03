@@ -210,7 +210,7 @@ const SingleProductPage = async ({ params }: PageProps) => {
     return (
         <div className="one_product_page container py-6 px-4 flex flex-col gap-10">
             {/* ===== MAIN IMAGE + INFO ===== */}
-            <div className="flex max-md:flex-col justify-between gap-10 items-stretch min-h-[568px] max-md:min-h-0">
+            <div className="flex max-md:flex-col justify-between gap-10 items-stretch max-md:min-h-0">
 
                 {/* LEFT: IMAGE SECTION WITH SLIDER */}
                 <div className="w-[48%] max-md:w-full flex flex-col">

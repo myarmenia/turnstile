@@ -39,7 +39,12 @@ const InfoServices = () => {
         },
     ]
     return (
-        <div className='info_services'>
+        <div className='info_services mt-20 pt-6 mb-10'>
+            <h2 className='mb-10 text-[#0E0449] text-[28px] text-center font-bold
+                    lending-[10px] px-4 arm_Hmks_Bebas_Neue uppercase lg:text-[35px] md:text-[30px]'>
+                {t('h2')}
+            </h2>
+           
             <div className="container flex flex-wrap justify-center gap-[20px] px-[20px]">
                 {
                     servicesData.map((service: IServicesItem) => (
