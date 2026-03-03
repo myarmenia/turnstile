@@ -45,7 +45,7 @@ const HomePageBanner: React.FC  = () => {
         },
       ];
     return (
-        <div className="home_page_banner h-[650px] bg-white !rounded-none">
+        <div className="home_page_banner h-[540px] bg-white !rounded-none">
             <Swiper
                 modules={[Pagination, Navigation, Autoplay]} 
                 pagination={{ clickable: true }}

@@ -55,23 +55,22 @@ export default function CatalogItemNew({
   };
 
   return (
-    <div className="container pb-6 flex flex-col gap-7 items-end">
+    <div className="container pb-6 flex flex-col gap-7 items-end">  
 
-
-      <div className="flex gap-4 w-full justify-end mb-6">
-
+      <div className="flex flex-col sm:flex-col md:flex-row gap-4 
+                      w-full md:justify-end mb-6 px-4 md:px-10">
         <input
           type="text"
           placeholder={t('filter.searchText')}
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          className="border p-2 rounded w-[360px]"
+          className="border p-2 rounded w-full md:w-[360px]"
         />
 
         <select
           value={category_id}
           onChange={(e) => setCategory(e.target.value)}
-          className="border p-2 rounded  w-[360px]"
+          className="border p-2 rounded w-full md:w-[360px]"
         >
           <option value="">{t('filter.allCategories')}</option>
 
@@ -80,20 +79,15 @@ export default function CatalogItemNew({
               {cat.name}
             </option>
           ))}
-
         </select>
 
         <button
           onClick={applyFilter}
-          className="bg-[#5939F5] text-white px-4 rounded"
+          className="bg-[#5939F5] text-white px-4 py-2 rounded w-full md:w-auto"
         >
           {t('filter.buttonFilter')}
         </button>
-
-      </div>
-
-      
-      
+      </div>       
       
       
       <div className="flex flex-wrap justify-center gap-[20px]">
@@ -123,6 +117,7 @@ export default function CatalogItemNew({
               <h3 className="freeSans font_color font-normal text-[16px] leading-[19.2px] text-center">
                 {item.code}
               </h3>
+              <h4 className="text-center w-full overflow-hidden whitespace-nowrap text-ellipsis">{item.name}</h4>
 
               <ButtonComponent
                 name={t('OurProductsSection.order_btn')}
