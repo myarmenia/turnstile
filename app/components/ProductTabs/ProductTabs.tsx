@@ -121,39 +121,71 @@ const ProductTabs = ({ data }: TabProps) => {
             icon: <FaVideo />,
             content: data.videos.length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {data.videos.map((video, index) => (
-                        <div key={index} className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                            <div className="relative pt-[56.25%]"> {/* 16:9 соотношение */}
-                                <video
-                                    src={video.url}
-                                    controls
-                                    className="absolute top-0 left-0 w-full h-full object-cover"
-                                    title={getVideoTitle(video, index)}
-                                    poster={video.thumbnail}
-                                    preload="metadata"
-                                    autoPlay
-                                />
-                            </div>
-                            {(video.title || video.description) && (
-                                <div className="p-4">
-                                    {video.title && (
-                                        <h4 className="font-medium text-gray-800 mb-1">
-                                            {video.title}
-                                        </h4>
+                    {data.videos.map((video, index) => {
+
+                        const isYouTube =
+                            video.url.includes('youtube.com') ||
+                            video.url.includes('youtu.be');
+
+                        const getYoutubeId = (url: string) => {
+                            const regExp =
+                                /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
+                            const match = url.match(regExp);
+                            return match ? match[1] : null;
+                        };
+
+                        return (
+                            <div
+                                key={index}
+                                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                            >
+                                <div className="relative pt-[56.25%]">
+
+                                    {isYouTube ? (
+                                        <iframe
+                                            // src={`https://www.youtube.com/embed/${getYoutubeId(video.url)}`}
+                                            src={`https://www.youtube.com/embed/${getYoutubeId(video.url)}?autoplay=1&mute=1`}
+                                            className="absolute top-0 left-0 w-full h-full"
+                                            allowFullScreen
+                                            title={getVideoTitle(video, index)}
+                                            
+                                        />
+                                    ) : (
+                                        <video
+                                            src={video.url}
+                                            controls
+                                            className="absolute top-0 left-0 w-full h-full object-cover"
+                                            title={getVideoTitle(video, index)}
+                                            poster={video.thumbnail}
+                                            preload="metadata"
+                                            autoPlay
+                                        />
                                     )}
-                                    {video.description && (
-                                        <p className="text-sm text-gray-600">
-                                            {video.description}
-                                        </p>
-                                    )}
+
                                 </div>
-                            )}
-                        </div>
-                    ))}
+
+                                {(video.title || video.description) && (
+                                    <div className="p-4">
+                                        {video.title && (
+                                            <h4 className="font-medium text-gray-800 mb-1">
+                                                {video.title}
+                                            </h4>
+                                        )}
+                                        {video.description && (
+                                            <p className="text-sm text-gray-600">
+                                                {video.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
             ),
             visible: data.videos.length > 0
         },
+        
         {
             id: 'documents',
             label: t('documents'),
