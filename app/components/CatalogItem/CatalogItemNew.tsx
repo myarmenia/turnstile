@@ -90,7 +90,7 @@ export default function CatalogItemNew({
       </div>       
       
       
-      <div className="flex flex-wrap justify-center gap-[20px]">
+      <div className="flex flex-wrap justify-center w-full gap-[20px]">
         {products.map(item => (
           <div
             key={item.id}

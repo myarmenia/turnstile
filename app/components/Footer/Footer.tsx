@@ -36,11 +36,13 @@ const Footer = () => {
 
                 {/* Навигация */}
                 <nav>
-                    <ul className='flex flex-col gap-[10px]'>
+                    <ul className='flex flex-col gap-[10px]' >
                         <NavMenuItem name={t('NavMenu.home')} path="/" color="white" />
                         <NavMenuItem name={t('NavMenu.turnstile')} path="/turnstile" color="white" />
                         <NavMenuItem name={t('NavMenu.security-systems')} path="/security-systems" color="white" />
                         <NavMenuItem name={t('NavMenu.catalog')} path="/catalog" color="white" />
+                        <NavMenuItem name={t('NavMenu.crm-system')} path="/crm-system" color="white" />
+                        <NavMenuItem name={t('NavMenu.contact-us')} path="/contact-us" color="white" />
                     </ul>
                 </nav>
 
