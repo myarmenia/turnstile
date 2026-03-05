@@ -22,6 +22,8 @@ const BurgerMenu = () => {
                 {/* <BurgerMenuItem name={t('smart-home')} path="/smart-home" />
                 <BurgerMenuItem name={t('about-us')} path="/about-us" /> */}
                 <BurgerMenuItem name={t('catalog')} path="/catalog" />
+                <BurgerMenuItem name={t('crm-system')} path="/crm-system" />
+                <BurgerMenuItem name={t('contact-us')} path="/contact-us" />
             </ul>
             <div className='px-[10px]'>
                 <SelectLng />
