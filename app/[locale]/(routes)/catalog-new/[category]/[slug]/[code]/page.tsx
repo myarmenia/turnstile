@@ -238,9 +238,9 @@ const SingleProductPage = async ({ params }: PageProps) => {
                 {/* RIGHT: PRODUCT INFO */}
                 <div className="w-[48%] max-md:w-full">
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 h-full flex flex-col">
-                        {/* Заголовок */}
-                        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 uppercase mb-4">
-                            {product.code}  {product.name}
+                        {/* Заголовок */}                        
+                        <h1 className="text-2xl lg:text-3xl custom:text-2xl font-bold text-gray-900 uppercase mb-4">
+                            {product.code} {product.name}
                         </h1>
 
                         {/* Основные преимущества */}
@@ -301,13 +301,10 @@ const SingleProductPage = async ({ params }: PageProps) => {
                             </div>
                         </div>
 
-                        {/* Компактный блок контактов */}
+                        {/* Компактный блок контактов */}                     
                         <div className="mb-4">
                             <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
                                 <div className="flex items-center gap-2 mb-3">
-                                    {/* <div className="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
-                                        <FaPhone className="text-blue-600 text-sm" />
-                                    </div> */}
                                     <div>
                                         <h4 className="text-sm font-semibold text-gray-800">
                                             {tProduct('contactForPurchase')}
@@ -315,42 +312,33 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-2">
+                                {/* Контейнер для телефонов и почты */}
+                                <div className="flex flex-col xl:flex-row gap-2 w-full">
+                                    {/* Телефоны */}
                                     {phoneNumbers[apiLocale as keyof typeof phoneNumbers]?.map((phone, index) => (
                                         <a
                                             key={index}
                                             href={`tel:${formatPhoneForLink(phone)}`}
-                                            className="flex items-center gap-2 p-2 bg-white rounded hover:bg-blue-50 transition-colors group"
+                                            className="flex items-center gap-2 p-2 bg-white rounded hover:bg-blue-50 transition-colors group w-full sm:w-auto"
                                         >
                                             <div className="w-6 h-6 flex items-center justify-center bg-green-100 rounded-full group-hover:bg-green-200 transition-colors">
                                                 <FaPhone className="text-green-600 text-xs" />
                                             </div>
-                                            <span className="text-sm font-medium text-gray-800">
-                                                {phone}
-                                            </span>
-                                            {/* <span className="ml-auto text-blue-600 text-xs font-medium group-hover:text-blue-800">
-                                                {tProduct('call')}
-                                            </span> */}
+                                            <span className="text-sm font-medium text-gray-800">{phone}</span>
                                         </a>
-
-                                        
                                     ))}
 
+                                    {/* Email */}
                                     <a
                                         href="mailto:info@webex.am"
-                                        className="flex items-center gap-2 p-2 bg-white rounded hover:bg-blue-50 transition-colors group"
+                                        className="flex items-center gap-2 p-2 bg-white rounded hover:bg-blue-50 transition-colors group w-full sm:w-auto"
                                     >
                                         <div className="w-6 h-6 flex items-center justify-center bg-purple-100 rounded-full group-hover:bg-purple-200 transition-colors">
-                                            <svg className="w-3 h-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="w-3 h-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                             </svg>
                                         </div>
-                                        <span className="text-sm font-medium text-gray-800">
-                                            info@webex.am
-                                        </span>
-                                        {/* <span className="ml-auto text-blue-600 text-xs font-medium group-hover:text-blue-800">
-                                            {tProduct('email') || 'Email'}
-                                        </span> */}
+                                        <span className="text-sm font-medium text-gray-800">info@webex.am</span>
                                     </a>
                                 </div>
                             </div>
