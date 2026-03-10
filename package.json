@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "export",
-    "postbuild": "next-sitemap"
+    "export": "export"
+    
   },
   "overrides": {
     "glob": "^10.4.6"
