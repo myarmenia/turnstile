@@ -51,7 +51,7 @@ export default function CatalogItemNew({
     if (code) query.append('code', code);
     if (category_id) query.append('category_id', category_id);
 
-    router.push(`/${lang}/catalog-new?${query.toString()}`);
+    router.push(`/${lang}/catalog?${query.toString()}`);
   };
 
   return (
@@ -100,7 +100,7 @@ export default function CatalogItemNew({
             <div
               className="w-full h-[233px] shadow-sm rounded relative overflow-hidden"
               onClick={() =>
-                router.push(`/${lang}/catalog-new/${item.category_slug}/${item.slug}/${item.code}`)
+                router.push(`/${lang}/catalog/${item.category_slug}/${item.slug}/${item.code}`)
               }
               title={item.code}
             >
