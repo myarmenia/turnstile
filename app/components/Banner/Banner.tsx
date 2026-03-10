@@ -33,6 +33,7 @@ const Banner: React.FC<BannerProps> = ({ bannerData, bg, content, page }) => {
       className={`w-full ${
         page === "turnstile"
           ? "min-h-[580px] max-sm:min-h-[650px]"
+        : page === "catalog" ? "min-h-[400px] max-sm:min-h-[400px]"
           : "min-h-[480px] max-sm:min-h-[480px]"
       }`}
     >

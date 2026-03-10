@@ -76,7 +76,7 @@ export async function generateMetadata({
         openGraph: {
             title: product.name,
             description: product.description.replace(/<[^>]*>/g, '').slice(0, 160),
-            url: `${apiUrl}/${locale}/catalog-new/${product.category_slug}/${product.slug}/${product.code}`,
+            url: `${apiUrl}/${locale}/catalog/${product.category_slug}/${product.slug}/${product.code}`,
             siteName: "turniket.am",
             type: "website",
             images: mainImageUrl
@@ -165,8 +165,8 @@ const SingleProductPage = async ({ params }: PageProps) => {
     const documentItems = product.documents;
     const additionalFileItems = product.additional_files;
 
-    const productUrl = `/catalog-new/${product.category_slug}/${product.slug}/${product.code}`;
-    const currentPath = `/${locale}/catalog-new/${category}/${slug}/${code}`;
+    const productUrl = `/catalog/${product.category_slug}/${product.slug}/${product.code}`;
+    const currentPath = `/${locale}/catalog/${category}/${slug}/${code}`;
 
     // Телефоны для разных языков
     const phoneNumbers = {
