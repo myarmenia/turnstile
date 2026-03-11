@@ -72,10 +72,10 @@ export async function generateMetadata({
     const mainImageUrl = product.main_image?.url || "";
     return {
         title: product.name,
-        description: product.description.replace(/<[^>]*>/g, '').slice(0, 160),
+        description: product?.short_description?.replace(/<[^>]*>/g, '').slice(0, 160),
         openGraph: {
             title: product.name,
-            description: product.description.replace(/<[^>]*>/g, '').slice(0, 160),
+            description: product?.short_description?.replace(/<[^>]*>/g, '').slice(0, 160),
             url: `${apiUrl}/${locale}/catalog/${product.category_slug}/${product.slug}/${product.code}`,
             siteName: "turniket.am",
             type: "website",
@@ -93,7 +93,7 @@ export async function generateMetadata({
         twitter: {
             card: "summary_large_image",
             title: product.name,
-            description: product.description.replace(/<[^>]*>/g, '').slice(0, 160),
+            description: product?.short_description?.replace(/<[^>]*>/g, '').slice(0, 160),
             images: mainImageUrl ? [mainImageUrl] : [],
         },
     };
@@ -272,7 +272,7 @@ const SingleProductPage = async ({ params }: PageProps) => {
                                 <div className="bg-gray-50 p-3 rounded-lg">
                                     <div
                                         className="text-gray-700 text-sm"
-                                        dangerouslySetInnerHTML={{ __html: product.short_description }}
+                                        dangerouslySetInnerHTML={{ __html: product?.short_description }}
                                     />
                                 </div>
                             

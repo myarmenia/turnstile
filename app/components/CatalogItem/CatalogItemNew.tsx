@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -34,6 +34,8 @@ export default function CatalogItemNew({
   const [lang, setLang] = useState('am');
   const [code, setCode] = useState('');
   const [category_id, setCategory] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cookieLang =
@@ -44,6 +46,25 @@ export default function CatalogItemNew({
 
     setLang(cookieLang);
   }, []);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  
 
   const applyFilter = () => {
     const query = new URLSearchParams();
@@ -67,7 +88,7 @@ export default function CatalogItemNew({
           className="border p-2 rounded w-full md:w-[360px]"
         />
 
-        <select
+        {/* <select
           value={category_id}
           onChange={(e) => setCategory(e.target.value)}
           className="border p-2 rounded w-full md:w-[360px]"
@@ -79,7 +100,64 @@ export default function CatalogItemNew({
               {cat.name}
             </option>
           ))}
-        </select>
+        </select> */}
+
+        <div ref={dropdownRef} className="relative w-full md:w-[360px]">
+
+          <button
+            onClick={() => setIsOpen(prev => !prev)}
+            className="border px-4 py-2 rounded font_color flex items-center justify-between w-full"
+          >
+            {category_id
+              ? categories.find(c => String(c.id) === category_id)?.name
+              : t('filter.allCategories')}
+
+            <svg
+              className={`transition-transform ${isOpen ? "rotate-180" : ""}`}              
+              width="12"
+              height="6"
+              viewBox="0 0 12 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.928 0.818248L5.92798 5.18188L0.927979 0.818248"
+                stroke="black"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          {isOpen && (
+            <div className="absolute w-full bg-white rounded-md shadow-lg z-50 mt-1 max-h-[250px] overflow-auto">
+
+              <button
+                className="font_color block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                onClick={() => {
+                  setCategory('');
+                  setIsOpen(false);
+                }}
+              >
+                {t('filter.allCategories')}
+              </button>
+
+              {categories.map(cat => (
+                <button
+                  key={cat.id}
+                  className="font_color block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  onClick={() => {
+                    setCategory(String(cat.id));
+                    setIsOpen(false);
+                  }}
+                >
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+          )}
+
+        </div>
 
         <button
           onClick={applyFilter}
@@ -100,7 +178,11 @@ export default function CatalogItemNew({
             <div
               className="w-full h-[233px] shadow-sm rounded relative overflow-hidden"
               onClick={() =>
-                router.push(`/${lang}/catalog/${item.category_slug}/${item.slug}/${item.code}`)
+                // router.push(`/${lang}/catalog/${item.category_slug}/${item.slug}/${item.code}`)
+                window.open(
+                          `/${lang}/catalog/${item.category_slug}/${item.slug}/${item.code}`,
+                  "_blank"
+                )
               }
               title={item.code}
             >

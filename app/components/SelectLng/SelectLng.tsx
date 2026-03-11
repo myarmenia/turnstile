@@ -15,6 +15,7 @@ const SelectLng = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const lang = pathname.split('/')[1];
 
   const setCookie = (name: string, value: string, days: number) => {
     const date = new Date();
@@ -23,22 +24,41 @@ const SelectLng = () => {
     document.cookie = `${name}=${value}; ${expires}; path=/`;
   };
 
-  const getCookie = (name: string) => {
-    const cookies = document.cookie.split('; ');
-    const cookie = cookies.find((c) => c.startsWith(`${name}=`));
-    return cookie ? cookie.split('=')[1] : null;
-  };
+  // const getCookie = (name: string) => {
+  //   const cookies = document.cookie.split('; ');
+  //   const cookie = cookies.find((c) => c.startsWith(`${name}=`));
+  //   return cookie ? cookie.split('=')[1] : null;
+  // };
+
+  // useEffect(() => {
+  //   const savedLang = getCookie('lang') || 'am';
+  //   setCurrentLng(savedLang);
+  // }, []);
 
   useEffect(() => {
-    const savedLang = getCookie('lang') || 'am';
-    setCurrentLng(savedLang);
-  }, []);
+    const langFromUrl = pathname.split('/')[1] || 'am';
+    setCurrentLng(langFromUrl);
+    setCookie('lang', langFromUrl, 365);
+
+  }, [pathname]);
+
+
+
+  // const changeLanguage = (lng: string) => {
+  //   const slicePathname = pathname.slice(3); // remove current language from path
+  //   setCurrentLng(lng);
+  //   setCookie('lang', lng, 365);
+  //   router.push(`/${lng}${slicePathname}`);
+  // };
 
   const changeLanguage = (lng: string) => {
-    const slicePathname = pathname.slice(3); // remove current language from path
+    const segments = pathname.split('/');
+    segments[1] = lng;
+
     setCurrentLng(lng);
     setCookie('lang', lng, 365);
-    router.push(`/${lng}${slicePathname}`);
+
+    router.push(segments.join('/'));
   };
 
   // Ստեղծում ենք հաջորդ լեզվի ընտրություն՝ ցիկլիկորեն
